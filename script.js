@@ -1,102 +1,67 @@
-var lcChar = ["abcdefghijklmnopqrstuvwxyz"];
-var upChar = ["]ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
-var numChar = ["0123456789"];
-var speChar = ["!@#$%^&*()"];
-// var selectionIndex = passLength;
-var length = prompt("Length, between 8 and 128 characters")
-// var passLength = length
-var lc = confirm("Lowercase?")
-var uc = confirm("Uppercase?")
-var numeric = confirm("Numeric Values?")
-var spChar = confirm("Special Characters?")
-var selectionIndex = ["Your Selections: " + length]
-var valid = confirm(selectionIndex) 
-var selectionIndex = ["Your Selections: " + length]
-var valid = confirm(selectionIndex)
+// Instructions//
+// GIVEN I need a new, secure password
+// WHEN I click the button to generate a password
+// THEN I am presented with a series of prompts for password criteria
+// WHEN prompted for password criteria
+// THEN I select which criteria to include in the password
+// WHEN prompted for the length of the password
+// THEN I choose a length of at least 8 characters and no more than 128 characters
+// WHEN asked for character types to include in the password
+// THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
+// WHEN I answer each prompt
+// THEN my input should be validated and at least one character type should be selected
+// WHEN all prompts are answered
+// THEN a password is generated that matches the selected criteria
+// WHEN the password is generated
+// THEN the password is either displayed in an alert or written to the page
 
-console.log(upChar[4])
+
+
+
+// Global Variables//
+var lcChar = "abcdefghijklmnopqrstuvwxyz";
+var upChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var numChar = "0123456789";
+var speChar = "!@#$%^&*()";
 
 // Main Function//
 function generatePassword(){
-  lengthPrompt();
-  return "password";
-}
+  var length = prompt("Length, between 8 and 128 characters")
+  var lengthInt = parseInt(length, 10)
+  var lc = confirm("Lowercase?")
+  var uc = confirm("Uppercase?")
+  var numeric = confirm("Numeric Values?")
+  var spChar = confirm("Special Characters?")
+  var options = "";
 
-//Length Prompt//
-function lengthPrompt (){
-  if (length >= 8 && length<=128){
-  console.log("success");
-  // console.log(passLength)
-  lowercase ();
-} else {
-  alert("Please choose a number between 8 and 128");
-  generatePassword();
-}
 
-// Lowercase Prompt//
-function lowercase () {
+  // Validate Length choice //
+  //if invalid length, return empty string//
+  if (lengthInt < 8 || lengthInt  > 128 || isNaN(lengthInt)){
+    alert("Please choose a number between 8 and 128")
+    return "";
+  }
+  // If user selected lowercase add lowercase to options//
   if (lc == true){
-    uppercase();
-  } else {
-    uppercase();
+    options += lcChar
   }
-}
-
-
-// Uppercase Prompt//
-function uppercase () {
+  // If user selected uppercase add uppercase to options//
   if (uc == true){
-    console.log("uppercase success");
-    numbers();
-  } else {
-    console.log("no uppercase");
-    numbers();
+    options += upChar
   }
-}
-
-// Numbers Prompt//
-function numbers () {
+  // If user selected numbers add numbers to options//
   if (numeric == true){
-    console.log("number success");
-    specialCharacters();
-  } else {
-    console.log("no numbers");
-    specialCharacters();
-  }
-}
-
-// Special Characters Prompt//
-function specialCharacters () {
+    options += numChar
+  }// If user selected special characters add special characters to options//
   if (spChar == true){
-    console.log("Special Character success")
-    validInput();
-  } else {
-    console.log("no Special Characters")
-    validInput();
+    options += speChar
   }
-}
-
-// Confirming Selections//
-function validInput () {
-  if (valid = true){
-    console.log("confirm success")
-  } else {
-    console.log("confirm not success")
+  // Select a random character based on length//
+  for (var i=0; i < lengthInt ; i++){
+    var password = options.charAt(Math.floor(Math.random() * options.length))
   }
+  return password;
 }
-
-// console.log(specialCharacters*numbers*uppercase*lowercase*lengthPrompt)
-
-// Randomizer//
-// for (var i=0; i <= passLength; i++) {
-  // var newPassword = Math.floor(Math.random() * lowercase * uppercase * numbers * specialCharacters)
-  // document.getElementbyId("password").value =password;
-}
-
-
-
-
-
 
 // Assignment Code, DO NOT EDIT ANTHING  BELOW THIS LINE
 var generateBtn = document.querySelector("#generate");
@@ -114,3 +79,8 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 generatePassword()
+
+
+// Debug not processing information//
+
+// Have a last confirmation//
