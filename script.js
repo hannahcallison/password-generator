@@ -1,22 +1,3 @@
-// Instructions//
-// GIVEN I need a new, secure password
-// WHEN I click the button to generate a password
-// THEN I am presented with a series of prompts for password criteria
-// WHEN prompted for password criteria
-// THEN I select which criteria to include in the password
-// WHEN prompted for the length of the password
-// THEN I choose a length of at least 8 characters and no more than 128 characters
-// WHEN asked for character types to include in the password
-// THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
-// WHEN I answer each prompt
-// THEN my input should be validated and at least one character type should be selected
-// WHEN all prompts are answered
-// THEN a password is generated that matches the selected criteria
-// WHEN the password is generated
-// THEN the password is either displayed in an alert or written to the page
-
-// I  need help with adding a selection index confirmation//
-
 //Global Variables//
 var lcChar = ("abcdefghijklmnopqrstuvwxyz");
 var upChar = ("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
@@ -29,7 +10,7 @@ function generatePassword(){
   var length = prompt("Length, between 8 and 128 characters")
   var lengthInt = parseInt(length, 10)
 
-  //Validate Length choice//
+  //Validate length choice//
   //if invalid length, return empty string//
   if (lengthInt < 8 || lengthInt  > 128 || isNaN(lengthInt)){
     alert("Please choose a number between 8 and 128")
@@ -76,13 +57,13 @@ function generatePassword(){
   } else {
     options += ""
   }
-  // To verify at least one criteria (ex. length) was chosen
+  // To verify at least one criteria (ex. length) was chosen, otherwise null//
   if (options == ""){
     alert("Please choose at least one criteria, not including length.");
     return null;
   }
 
-  // Confirming user selection//
+  // Confirming user selection, otherwise null//
   selectionIndex = "Your Selections: " + selectionIndex.join(", ")
   if (confirm(selectionIndex) === false){
     return null;
@@ -90,7 +71,7 @@ function generatePassword(){
 
   //Select a random character based on length//
   //New  string 'options' has user selections so we can generate new string from desired criteria//
-  //Randomizes characters in new options string//
+  //Randomizes characters in new 'options' string//
   let password = "";
   for (var i=0; i < lengthInt ; i++){
     password += options.charAt(Math.floor(Math.random()  * options.length)
@@ -100,6 +81,7 @@ function generatePassword(){
   return password;
 }
 
+// Highlights and copies new password to user clipboard//
 var passwordSelect = document.querySelector("#password") 
 passwordSelect.addEventListener("click", function(){
   passwordSelect.select();

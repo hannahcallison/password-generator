@@ -13,7 +13,11 @@ For this project we were asked to make a password generator. Using JavaScript we
 - [X] Special Character Prompt
 - [X] Password tht is generated matches the selected criteria
 
-## Product Screenshot
+## Bonus 🏆
+> As a bonus I added the ability for users to copy their new password to their clipboard simply by clicking the text box
+
+## Product Screenshot gif
+!["Password Generator Functionality gif"](password-generator.gif)
 
 
 **Link to published password generator:** 
