@@ -15,7 +15,7 @@
 // WHEN the password is generated
 // THEN the password is either displayed in an alert or written to the page
 
-// I  need help with adding a selection index confirmation and debugging when first landing on the page//
+// I  need help with adding a selection index confirmation//
 
 //Global Variables//
 var lcChar = ("abcdefghijklmnopqrstuvwxyz");
@@ -28,11 +28,6 @@ function generatePassword(){
   //Local Variables//
   var length = prompt("Length, between 8 and 128 characters")
   var lengthInt = parseInt(length, 10)
-  var lc = confirm("Lowercase?")
-  var uc = confirm("Uppercase?")
-  var numeric = confirm("Numeric Values?")
-  var spChar = confirm("Special Characters?")
-  var options = "";
 
   //Validate Length choice//
   //if invalid length, return empty string//
@@ -40,10 +35,20 @@ function generatePassword(){
     alert("Please choose a number between 8 and 128")
     return "";
   }
+
+  var lc = confirm("Lowercase?")
+  var uc = confirm("Uppercase?")
+  var numeric = confirm("Numeric Values?")
+  var spChar = confirm("Special Characters?")
+  var options = "";
+  var selectionIndex = [];
+  selectionIndex.push(length)
+
   //If user selects lowercase add lowercase string to options//
   //If lowercase undesired, do not add lowercase string to options//
   if (lc == true){
     options += lcChar
+    selectionIndex.push("Lowercase")
   } else {
     options += ""
   }
@@ -51,6 +56,7 @@ function generatePassword(){
   //If uppercase undesired, do not add uppercase string to options//
   if (uc == true){
     options += upChar
+    selectionIndex.push("Uppercase")
   }else {
     options += ""
   }
@@ -58,6 +64,7 @@ function generatePassword(){
   //If numbers undesired, do not add numbers string to options//
   if (numeric == true){
     options += numChar
+    selectionIndex.push("Numbers") 
   } else {
     options += ""
   }
@@ -65,9 +72,22 @@ function generatePassword(){
   //If special characters undesired, do not add special characters string to options//
   if (spChar == true){
     options += speChar
+    selectionIndex.push("Special Characters")
   } else {
     options += ""
   }
+  // To verify at least one criteria (ex. length) was chosen
+  if (options == ""){
+    alert("Please choose at least one criteria, not including length.");
+    return null;
+  }
+
+  // Confirming user selection//
+  selectionIndex = "Your Selections: " + selectionIndex.join(", ")
+  if (confirm(selectionIndex) === false){
+    return null;
+  }
+
   //Select a random character based on length//
   //New  string 'options' has user selections so we can generate new string from desired criteria//
   //Randomizes characters in new options string//
@@ -80,6 +100,13 @@ function generatePassword(){
   return password;
 }
 
+var passwordSelect = document.querySelector("#password") 
+passwordSelect.addEventListener("click", function(){
+  passwordSelect.select();
+  navigator.clipboard.writeText(passwordSelect.value);
+  alert(passwordSelect.value + " copied to the clipboard!")
+})
+
 // Assignment Code, DO NOT EDIT ANTHING  BELOW THIS LINE
 var generateBtn = document.querySelector("#generate");
 
@@ -89,10 +116,7 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-generatePassword()
