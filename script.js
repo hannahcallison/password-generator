@@ -15,17 +15,17 @@
 // WHEN the password is generated
 // THEN the password is either displayed in an alert or written to the page
 
+// I  need help with adding a selection index confirmation and debugging when first landing on the page//
 
+//Global Variables//
+var lcChar = ("abcdefghijklmnopqrstuvwxyz");
+var upChar = ("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+var numChar = ("0123456789");
+var speChar = ("!@#$%^&*_+-=;':<");
 
-
-// Global Variables//
-var lcChar = "abcdefghijklmnopqrstuvwxyz";
-var upChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var numChar = "0123456789";
-var speChar = "!@#$%^&*()";
-
-// Main Function//
+//Main Function//
 function generatePassword(){
+  //Local Variables//
   var length = prompt("Length, between 8 and 128 characters")
   var lengthInt = parseInt(length, 10)
   var lc = confirm("Lowercase?")
@@ -34,32 +34,49 @@ function generatePassword(){
   var spChar = confirm("Special Characters?")
   var options = "";
 
-
-  // Validate Length choice //
+  //Validate Length choice//
   //if invalid length, return empty string//
   if (lengthInt < 8 || lengthInt  > 128 || isNaN(lengthInt)){
     alert("Please choose a number between 8 and 128")
     return "";
   }
-  // If user selected lowercase add lowercase to options//
+  //If user selects lowercase add lowercase string to options//
+  //If lowercase undesired, do not add lowercase string to options//
   if (lc == true){
     options += lcChar
+  } else {
+    options += ""
   }
-  // If user selected uppercase add uppercase to options//
+  //If user selects uppercase add uppercase string to options//
+  //If uppercase undesired, do not add uppercase string to options//
   if (uc == true){
     options += upChar
+  }else {
+    options += ""
   }
-  // If user selected numbers add numbers to options//
+  //If user selects numbers add numbers array to options//
+  //If numbers undesired, do not add numbers string to options//
   if (numeric == true){
     options += numChar
-  }// If user selected special characters add special characters to options//
+  } else {
+    options += ""
+  }
+  //If user selects special characters add special characters array to options//
+  //If special characters undesired, do not add special characters string to options//
   if (spChar == true){
     options += speChar
+  } else {
+    options += ""
   }
-  // Select a random character based on length//
+  //Select a random character based on length//
+  //New  string 'options' has user selections so we can generate new string from desired criteria//
+  //Randomizes characters in new options string//
+  let password = "";
   for (var i=0; i < lengthInt ; i++){
-    var password = options.charAt(Math.floor(Math.random() * options.length))
+    password += options.charAt(Math.floor(Math.random()  * options.length)
+    );
   }
+  //Adds new string to password input//
   return password;
 }
 
@@ -79,8 +96,3 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 generatePassword()
-
-
-// Debug not processing information//
-
-// Have a last confirmation//
