@@ -21,3 +21,4 @@ For this project we were asked to make a password generator. Using JavaScript we
 
 
 **Link to published password generator:** 
+https://hannahcallison.github.io/password-generator/
